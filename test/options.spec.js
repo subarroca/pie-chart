@@ -10,12 +10,14 @@ describe("options", function() {
       expect($utils.sanitizeOptions({mode: "gauge"})).toEqual({
         mode: "gauge",
         thickness: 20,
+        emptyColor:'white',
         total: 100
       });
       
       expect($utils.sanitizeOptions({mode: "gauge", total: "80"})).toEqual({
         mode: "gauge",
         thickness: 20,
+        emptyColor:'white',
         total: 80
       });
     }));

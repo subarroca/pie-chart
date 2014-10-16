@@ -1,6 +1,6 @@
-/*! pie-chart - v1.0.0 - 2013-11-11
+/*! pie-chart - v1.0.0 - 2014-10-16
 * https://github.com/n3-charts/pie-chart
-* Copyright (c) 2013 n3-charts  Licensed ,  */
+* Copyright (c) 2014 n3-charts  Licensed ,  */
 angular.module('n3-pie-chart', ['n3-pie-utils'])
 
 .directive('pieChart', ['$utils', function($utils) {
@@ -312,7 +312,7 @@ addDataForGauge: function(data, options) {
   
   data = data.concat();
   
-  data.push({value: options.total - data[0].value, color: "white", __isComplement: true});
+  data.push({value: options.total - data[0].value, color: options.emptyColor, __isComplement: true});
 
   return data;
 },
@@ -389,6 +389,12 @@ sanitizeGaugeOptions: function(options) {
     options.total = 100;
   } else {
     options.total = parseInt(options.total);
+  }
+
+  if (options.emptyColor === undefined) {
+    options.emptyColor = 'white';
+  } else {
+    options.emptyColor = options.emptyColor;
   }
 }
 

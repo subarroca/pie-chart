@@ -1,6 +1,6 @@
-/*! pie-chart - v1.0.0 - 2013-11-11
+/*! pie-chart - v1.0.0 - 2014-10-16
 * https://github.com/n3-charts/pie-chart
-* Copyright (c) 2013 n3-charts  Licensed ,  */
+* Copyright (c) 2014 n3-charts  Licensed ,  */
 'use strict';
 
 /*global window */
@@ -577,12 +577,14 @@ describe("options", function() {
       expect($utils.sanitizeOptions({mode: "gauge"})).toEqual({
         mode: "gauge",
         thickness: 20,
+        emptyColor:'white',
         total: 100
       });
       
       expect($utils.sanitizeOptions({mode: "gauge", total: "80"})).toEqual({
         mode: "gauge",
         thickness: 20,
+        emptyColor:'white',
         total: 80
       });
     }));
