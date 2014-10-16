@@ -96,6 +96,8 @@ updatePaths: function(svg, data, dimensions, options) {
     .selectAll('.arc')
     .data(tools.pie(data), function(d) {return d.data.label;})
   
+  var initialized = ! angular.isUndefined(paths[0][0]);
+
   paths.enter()
     .append("path")
       .attr({
@@ -120,6 +122,30 @@ updatePaths: function(svg, data, dimensions, options) {
         this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
       })
   ;
+  
+  if(initialized){
+    paths
+    .transition()
+      .duration(250)
+      .attrTween("d", tween)
+      .style({
+        "fill": function(d) {return d.data.color;},
+        "fill-opacity": 0.8
+      })
+      .each("end", function(d) {
+        this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
+      })
+    ;
+  }else{
+    paths
+    .transition()
+      .duration(250)
+      .attrTween("d", tween)
+      .each("end", function(d) {
+        this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
+      })
+    ;
+  }
   
   paths.exit().remove();
   
