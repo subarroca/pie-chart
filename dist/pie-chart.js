@@ -81,6 +81,7 @@ angular.module('n3-pie-utils', [])
 
 updatePaths: function(svg, data, dimensions, options) {
   var tools = this.getTools(dimensions, options);
+  var initialized = this.__current;
   
   var tween = function(d) {
     var oldAngles = this.__current ? this.__current : {startAngle: d.startAngle, endAngle: d.startAngle};
@@ -115,6 +116,17 @@ updatePaths: function(svg, data, dimensions, options) {
         this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
       })
   ;
+  
+  if(initialized){
+    paths
+      .transition()
+        .duration(250)
+        .style({
+          "fill": function(d) {return d.data.color;},
+          "fill-opacity": 0.8
+        })
+    ;
+  }
   
   paths.exit().remove();
   
