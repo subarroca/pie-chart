@@ -112,21 +112,14 @@ updatePaths: function(svg, data, dimensions, options) {
     .transition()
       .duration(250)
       .attrTween("d", tween)
+      .style({
+        "fill": function(d) {return d.data.color;},
+        "fill-opacity": 0.8
+      })
       .each("end", function(d) {
         this.__current = {startAngle: d.startAngle, endAngle: d.endAngle};
       })
   ;
-  
-  if(initialized){
-    paths
-      .transition()
-        .duration(250)
-        .style({
-          "fill": function(d) {return d.data.color;},
-          "fill-opacity": 0.8
-        })
-    ;
-  }
   
   paths.exit().remove();
   
